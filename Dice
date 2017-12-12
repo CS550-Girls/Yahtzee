@@ -1,0 +1,19 @@
+import pygame
+import random
+
+
+class Die():
+	def __init__(self, rect):
+		self.rect = rect
+		self.value = 0
+
+	def roll():
+		self.value = random.randint(1,7)
+		
+		self.image = str('die_' + self.value + '.png')
+
+		return self.value
+
+	def print():
+		screen.blit(self.image, self.rect)
+		
