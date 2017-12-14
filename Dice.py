@@ -33,6 +33,7 @@ class Die():
 		self.value = random.randint(1,6)
 		image = pygame.image.load('Resources/Die_' + str(self.value) + '.png')
 		self.image =  pygame.transform.scale(image, (100, 100))
+		screen.blit(self.image, self.rect)
 
 		return self.value
 
@@ -50,7 +51,7 @@ class Dice():
 
 		for i in range(0, 5):
 			x = 50 + (150*i)
-			y = 250
+			y = 300
 			rect = pygame.Rect(x, y, 0, 0)
 
 			self.dice.append(Die(rect))
@@ -72,30 +73,42 @@ class Dice():
 				self.values.append(Die.roll())
 
 			Die.print()
+		self.rolls += 1
 
+def screen_set():
+	screen.fill([255, 255, 255])
+
+	background_image = pygame.transform.scale(pygame.image.load('Resources/Background.png'), (800, 600))
+	screen.blit(background_image, (0, 0))
+
+	if Dice.rolls < 3:
+		big_font = pygame.font.SysFont('Calibri Light', 35)
+		text = big_font.render('press the spacebar to roll', True, (255, 255, 255))
+		screen.blit(text, (250, 520))
+
+		small_font = pygame.font.SysFont('Calibri Light', 28)
+		text = small_font.render(str(3-Dice.rolls)+ ' rolls left', True, (255, 255, 255))
+		screen.blit(text, (350, 550))
+
+	Dice.print()
 
 ############## GAME LOGIC
 pygame.init()
+pygame.font.init()
 screen = pygame.display.set_mode((800, 600))
-background_image = pygame.image.load('Resources/Background.jpg')
-screen.blit(background_image, (0, 0))
 pygame.display.set_caption("Yahtzee")
 done = False
 
 Dice = Dice()
 
-Dice.roll()
-Dice.print()
-
 while not done:
-	pressed = pygame.key.get_pressed()
+	screen_set()
 
-	Dice.print()
+	pressed = pygame.key.get_pressed()
 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			done = True
-		if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+		if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and Dice.rolls < 3:
 			Dice.roll()
-
 	pygame.display.flip()
