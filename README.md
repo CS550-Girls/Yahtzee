@@ -9,7 +9,7 @@ This program runs a simple single-player Yatzhee game using the Pygame library.
   * self.rect 
   * self.value 
   * self.image 
-  **Roll**
+  #### Roll
   * generate random integer up to 6 and set self.value
   * couple second delay (for real roll effect)
   * send image of blurred dice to screen (for real roll effect)
