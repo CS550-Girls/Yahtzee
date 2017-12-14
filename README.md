@@ -15,7 +15,7 @@ This program runs a simple single-player Yatzhee game using the Pygame library.
   * return self.value  
   ### Print
   * send self.image to screen
-
+  
   ## Dice
   **Init** 
   * self.rolls
@@ -28,7 +28,7 @@ This program runs a simple single-player Yatzhee game using the Pygame library.
   * add one to self.rolls  
   ### Print
   * send images to screen  
-
+  
   ## Button
   **Init** *(rect)*
   * self.rect
@@ -36,7 +36,7 @@ This program runs a simple single-player Yatzhee game using the Pygame library.
   ### Print
   * send (transparent) button to screen
   * if self.score isn't zero, print score  
-
+  
   ## Upper Section Button
   **Init** *[subclass of Button] (self, rect, num)*
   * self.rect
