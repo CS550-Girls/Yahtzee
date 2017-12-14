@@ -2,55 +2,55 @@
 
 ## Overview
 This program runs a simple single-player Yatzhee game using the Pygame library. 
-</br>
+
 ## API
   ### Die
-  #### Init
-  *(self, rect)*
+  **Init**
+  *(self, rect)*
   * self.rect
   * self.value
   * self.image
-  #### Roll
+  **Roll**
   * generate random integer up to 6 and set self.value
   * couple second delay (for real roll effect)
   * send image of blurred dice to screen (for real roll effect)
   * set self.image to dice image that matches the roll value
   * return self.value
-  #### Print
+  **Print**
   * send self.image to screen
-  </br>
+
   ### Dice
-  #### Init
+  **Init**
   *(self)*
   * self.rolls
   * self.values
   * create 5 instances of Die
-  #### Roll
+  **Roll**
   * list of selected dice
   * roll listed dice
   * each dice returns value, adds to value list
   * add one to self.rolls
-  #### Print
+  **Print**
   * send images to screen
-  </br>
+
   ### Button
-  #### Init
+  **Init**
   *(self, rect)*
   * self.rect
   * self.score
-  #### Print
+  **Print**
   * send (transparent) button to screen
   * if self.score isn't zero, print score
-  </br>
+
   ### Upper Section Button
-  #### Init
+  **Init**
   *[subclass of Button] (self, rect, num)*
   * self.rect
   * self.num: dice roll value that counts towards score (i.e. count only 1s)
   * self.score
-  #### Calc
+  **Calc**
   * Based on vlaues of current roll, calculate score
   * Set self.score
-  #### Print
+  **Print**
   * send (transparent) button to screen
   * if self.score isn't zero, print score
