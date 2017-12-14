@@ -1,5 +1,3 @@
-# Yahtzee
-
 # Overview
 This program runs a simple single-player Yatzhee game using the Pygame library. 
 
