@@ -17,3 +17,12 @@ class Die():
 	def print():
 		screen.blit(self.image, self.rect)
 		
+		
+class Dice():
+	def __init__(self):
+	
+	def roll():
+	
+	def print():
+	
+		
