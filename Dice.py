@@ -95,11 +95,16 @@ def screen_set():
 ############## GAME LOGIC
 pygame.init()
 pygame.font.init()
+
 screen = pygame.display.set_mode((800, 600))
+
 pygame.display.set_caption("Yahtzee")
-done = False
+icon = pygame.image.load('Resources/Icon.png')
+pygame.display.set_icon(icon)
 
 Dice = Dice()
+
+done = False
 
 while not done:
 	screen_set()
