@@ -21,6 +21,8 @@ class Die():
 			if click[0] == 1:
 				self.save = not self.save
 
+				print('clicked!')
+
 				if self.save == False:
 					image = pygame.image.load('Resources/Die_' + str(self.value) + '.png')
 				elif self.save == True:
@@ -28,18 +30,27 @@ class Die():
 
 				self.image =  pygame.transform.scale(image, (100, 100))
 				screen.blit(self.image, self.rect)
+				time.sleep(.001)
+
+
+	def print(self):
+		screen.blit(self.image, self.rect)
 
 	def roll(self):
 		self.value = random.randint(1,6)
 		image = pygame.image.load('Resources/Die_' + str(self.value) + '.png')
 		self.image =  pygame.transform.scale(image, (100, 100))
-		screen.blit(self.image, self.rect)
+
+		self.print()
 
 		return self.value
 
-	def print(self):
+	def reset(self):
+		self.save = False
+		self.value = 1
+		image = pygame.image.load('Resources/Die_' + str(self.value) + '.png')
+		self.image =  pygame.transform.scale(image, (100, 100))
 		screen.blit(self.image, self.rect)
-
 
 class Dice():
 	def __init__(self):
@@ -60,7 +71,6 @@ class Dice():
 		for i in range(0, len(self.dice)):
 			Die = self.dice[i]
 
-			Die.check_status()
 			Die.print()
 
 	def roll(self):
@@ -74,6 +84,33 @@ class Dice():
 
 			Die.print()
 		self.rolls += 1
+
+	def check_status(self):
+		for i in range(0, len(self.dice)):
+			Die = self.dice[i]
+
+			Die.check_status()
+
+	def reset(self):
+		for i in range(0, len(self.dice)):
+			Die = self.dice[i]
+
+			Die.reset()
+
+			screen.fill([255, 255, 255])
+
+			background_image = pygame.transform.scale(pygame.image.load('Resources/Background.png'), (800, 600))
+			screen.blit(background_image, (0, 0))
+
+			big_font = pygame.font.SysFont('Calibri Light', 35)
+			text = big_font.render('press the spacebar to roll', True, (255, 255, 255))
+			screen.blit(text, (250, 520))
+
+			small_font = pygame.font.SysFont('Calibri Light', 28)
+			text = small_font.render(str(3-Dice.rolls)+ ' rolls left', True, (255, 255, 255))
+			screen.blit(text, (350, 550))
+
+			self.rolls = 0
 
 def screen_set():
 	screen.fill([255, 255, 255])
@@ -116,4 +153,9 @@ while not done:
 			done = True
 		if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and Dice.rolls < 3:
 			Dice.roll()
+		if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+			Dice.reset()
+		if event.type == pygame.MOUSEBUTTONDOWN:
+			Dice.check_status()
+
 	pygame.display.flip()
