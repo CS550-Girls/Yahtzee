@@ -148,14 +148,29 @@ while not done:
 
 	pressed = pygame.key.get_pressed()
 
-	for event in pygame.event.get():
-		if event.type == pygame.QUIT:
-			done = True
-		if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE and Dice.rolls < 3:
-			Dice.roll()
-		if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-			Dice.reset()
-		if event.type == pygame.MOUSEBUTTONDOWN:
-			Dice.check_status()
+	if Dice.rolls < 3:
+		scored = False
+
+		for event in pygame.event.get():
+			if event.type == pygame.QUIT:
+				done = True
+			if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+				Dice.roll()
+			if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+				Dice.reset()
+			if event.type == pygame.MOUSEBUTTONDOWN:
+				Dice.check_status()
+
+	elif Dice.rolls >= 3:
+		while not scored:
+			for event in pygame.event.get():
+				if event.type == pygame.QUIT:
+					done = True
+				if event.type == pygame.KEYDOWN and event.key == pygame.K_r:
+					Dice.reset()
+				if event.type == pygame.MOUSEBUTTONDOWN:
+					scored = Button.check_status()
+
+		Dice.reset()
 
 	pygame.display.flip()
