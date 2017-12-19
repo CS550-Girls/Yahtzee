@@ -174,7 +174,7 @@ def screen_set():
 def reset():
     global values
 
-    for i in range(0, len(values)-1):
+    for i in range(0, len(values)):
         values[i] = random.randint(1,6)
 
     print(values)
